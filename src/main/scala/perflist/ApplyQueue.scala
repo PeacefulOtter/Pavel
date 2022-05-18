@@ -2,8 +2,6 @@ package perflist
 
 import model.Predicate
 
-import scala.annotation.tailrec
-
 /**
  * @tparam O: Original list type
  * @tparam T: Pred input

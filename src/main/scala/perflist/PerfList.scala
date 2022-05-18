@@ -2,11 +2,6 @@ package perflist
 
 import model.Predicate
 
-import scala.annotation.tailrec
-
-// Collect = reduce (pred: Identity)
-// PerfEmpty[O] extends [O, O]
-
 trait PerfList[O, T] {
     def add( o: O ): PerfList[O, T]
     def map[U]( pred: Predicate[T, U] ): PerfList[O, U];

@@ -1,5 +1,5 @@
 import org.scalatest.flatspec.AnyFlatSpec
-import perflist.{ PerfEmpty, PerfNonEmpty }
+import perflist.PerfEmpty
 
 class PerfListTest extends AnyFlatSpec {
 	"PerfList" should "correctly map and reduce a list" in {

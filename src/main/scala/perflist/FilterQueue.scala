@@ -1,6 +1,6 @@
 package perflist
 
-import model.{BoolPredicate, Predicate}
+import model.Predicate
 
 import scala.annotation.tailrec
 
