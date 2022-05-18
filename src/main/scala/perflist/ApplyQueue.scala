@@ -2,16 +2,21 @@ package perflist
 
 import model.Predicate
 
+import scala.annotation.tailrec
 
-class ApplyQueue[O, T, U]( prev: Option[ApplyQueue[O, _, T]], func: Predicate[T, U] ) {
+/**
+ * @tparam O: Original list type
+ * @tparam T: Pred input
+ * @tparam U: Pred output
+ */
+trait ApplyQueue[O, T, U]
+{
+	def prev: Option[ApplyQueue[O, _, T]]
+	// def func: Predicate[T, U]
 	
-	def add[V]( elt: Predicate[U, V] ) = new ApplyQueue[O, U, V]( Some(this), elt )
+	def apply( elt: O, i: Int ): U
+	def reduce[V](list: List[O], pred: (V, U) => V, v: V): V
 	
-	def apply( elt: O, i: Int ): U = prev match {
-		case Some(p) => func( p.apply(elt, i ), i )
-		case None => elt match {
-			case (t: T) => func(t, i);
-			case _ => throw new Exception("Applying element of type " + elt.getClass + " to Queue of types " + this.getClass )
-		}
-	}
+	def mapAdd[V]( elt: Predicate[U, V] ) = new MapQueue[O, U, V]( Some(this), elt )
+	def filterAdd( elt: Predicate[U, Boolean] ) = new FilterQueue[O, U]( Some(this), elt )
 }
