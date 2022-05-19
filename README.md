@@ -20,9 +20,9 @@ import pavelist.PavelEmpty
 
 val myList: List[Int] = List(1, 2, 3, 4, 5)
 val pavelList = PavelEmpty(myList)
-    .map((elt: Int, i: Int) => elt * 3)
-    .filter((elt: Int, i: Int) => (elt % 2) == 0)
-    .map((elt: Int, i: Int) => elt / 2)
+    .map( (elt: Int, i: Int) => elt * 3 )
+    .filter( (elt: Int, i: Int) => (elt % 2) == 0 )
+    .map( (elt: Int, i: Int) => elt / 2 )
     .collect()
 ```
 
@@ -31,5 +31,5 @@ val pavelList = PavelEmpty(myList)
 import pavelist.PavelEmpty
 
 val pavelList = PavelEmpty(myList)
-    .reduce( (acc: Int, cur: Int) => acc + cur, 0)
+    .reduce( (acc: Int, cur: Int) => acc + cur, 0 )
 ```
