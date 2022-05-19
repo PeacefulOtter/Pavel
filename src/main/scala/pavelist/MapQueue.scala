@@ -1,4 +1,4 @@
-package perflist
+package pavelist
 
 import model.Predicate
 
