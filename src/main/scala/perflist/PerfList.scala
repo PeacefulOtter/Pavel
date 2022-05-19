@@ -8,6 +8,8 @@ trait PerfList[O, T] {
     def filter( pred: Predicate[T, Boolean] ): PerfList[O, T];
     def reduce[U]( pred: (U, T) => U, u: U): U;
     def collect(): List[T];
+
+    def print(): PerfList[O, T] = { println(collect()); this; }
 }
 
 case class PerfEmpty[O]( list: List[O] ) extends PerfList[O, O]

@@ -12,7 +12,7 @@ trait ApplyQueue[O, T, U]
 	def prev: Option[ApplyQueue[O, _, T]]
 	// def func: Predicate[T, U]
 	
-	def apply( elt: O, i: Int ): U
+	def apply( elt: O, i: Int ): (U, Boolean) // U = return type, Boolean = keep the element? (in case of filter)
 	def reduce[V](list: List[O], pred: (V, U) => V, v: V): V
 	
 	def mapAdd[V]( elt: Predicate[U, V] ) = new MapQueue[O, U, V]( Some(this), elt )
