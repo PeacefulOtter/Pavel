@@ -1,5 +1,6 @@
 
-Pavel is a project aimed at implementing highly performant operations like `map`, `filter`, `reduce` on Scala Lists
+Pavel is a project aimed at implementing highly performant operations like `map`, `filter`, `reduce` on Scala Lists.
+A concurrency version is implemented to perform all the below operations using multiple threads.
 
 Supports:
 
@@ -10,6 +11,8 @@ Supports:
 .collect()
 .print()
 ```
+
+The entire project is using [Functional Programming](https://fr.wikipedia.org/wiki/Functional_Programming)
 
 ### Usage
 
