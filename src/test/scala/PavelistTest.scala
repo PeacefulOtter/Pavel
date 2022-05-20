@@ -1,7 +1,10 @@
 import org.scalatest.flatspec.AnyFlatSpec
 import pavelist.PavelEmpty
+import test.benchmark
 
-class PavelistTest extends AnyFlatSpec {
+
+class PavelistTest extends AnyFlatSpec
+{
 	"Pavelist" should "correctly map and reduce a list" in {
 		val l: List[Int] = List(1, 2, 3, 4, 5)
 		val pl = new PavelEmpty(l)
@@ -29,33 +32,22 @@ class PavelistTest extends AnyFlatSpec {
 	"Pavelist" should "print after maps and filters" in {
 		val l: List[Int] = List(1, 2, 3, 4, 5)
 		val pl = new PavelEmpty(l)
-			.print()
 			.map( (elt: Int, i: Int) => elt * 3 )
-			.print()
 			.filter( (elt: Int, i: Int) => (elt % 2) == 0)
-			.print()
 			.map( (elt: Int, i: Int) => elt / 2 )
-			.print()
 			.collect()
 		assert( pl == List(3, 6) )
 	}
 	
 	"Pavelist" should "map filter map" in {
 		val l: List[Int] = List(1, 2, 3, 4, 5)
-		val pl = new PavelEmpty(l)
-		  .map( (elt: Int, i: Int) => elt * 3 )
-		  .filter( (elt: Int, i: Int) => (elt % 2) == 0)
-		  .map( (elt: Int, i: Int) => elt / 2 )
-		  .collect()
-		assert( pl == List(3, 6) )
-	}
-
-	"Pavelist" should "map concurrently" in {
-		val l: List[Int] = List.range(0, 1000000)
-		val pl = new PavelEmpty(l)
-			.map( (elt: Int, i: Int) => elt * 2 )
-			.conc()
-			.reduce( (acc: Int, cur: Int) => acc + cur, 0 )
-		assert( pl == l.map(_ * 2).sum )
+		benchmark(
+			l.map( _ * 3 ).filter( elt => (elt % 2) == 0 ).map( _ / 2 ),
+			new PavelEmpty(l)
+				.map( (elt: Int, i: Int) => elt * 3 )
+				.filter( (elt: Int, i: Int) => (elt % 2) == 0)
+				.map( (elt: Int, i: Int) => elt / 2 )
+				.collect()
+		)
 	}
 }
